@@ -1,5 +1,70 @@
 var tvSetting = $.extend({}, tvOption);
 
+var customLang = {
+	'zh' : {
+		title1 : "1分钟",
+		timeList1 : "1分钟 - 范围1天",
+
+		title5 : "5分钟",
+		timeList5 : "5分钟 - 范围2天",
+
+		title15 : "15分钟",
+		timeList15 : "15分钟 - 范围3天",
+
+		title30 : "30分钟",
+		timeList30 : "30分钟 - 范围1个月",
+
+		title60 : "1小时",
+		timeList60 : "1小时 - 范围3个月",
+
+		title240 : "4小时",
+		timeList240 : "4小时 - 范围6个月",
+
+		titleD : "1天",
+		timeListD : "1天 - 范围1年",
+
+		title3D : "3天",
+		timeList3D : "3天 - 范围3年",
+
+		datas: "周期：",
+		zhibiao: "指标："
+	},
+
+	'en' : {
+		title1 : "1M",
+		timeList1 : "1M - Range 1D",
+
+		title5 : "5M",
+		timeList5 : "5M - Range 2D",
+
+		title15 : "15M",
+		timeList15 : "15M - Range 3D",
+
+		title30 : "30M",
+		timeList30 : "30M - Range 1Month",
+
+		title60 : "1H",
+		timeList60 : "1H - Range 3Month",
+
+		title240 : "4H",
+		timeList240 : "4H - Range 6Month",
+
+		titleD : "1D",
+		timeListD : "1天 - Range 1Y",
+
+		title3D : "3D",
+		timeList3D : "3D - Range 1Y",
+
+		datas: "Period：",
+		zhibiao: "Indicatrix："
+	}
+};
+var getCustomLang = function(name){
+	var lang = tvGetParameterByName('lang') || 'zh';
+	return customLang[lang][name];
+}
+
+
 var wdws = null;
 var wdajax = null;
 var loopTime = null;
@@ -11,14 +76,14 @@ var repeatCount = 0;
 
 // 自定义周期按钮
 var tvTimeList = {
-	'1': { text: "1D", resolution: "1", description: "1分钟 - 范围1天", title: "1分钟", millisecond: 60 * 1 },
-	'5': { text: "1D", resolution: "5", description: "5分钟 - 范围2天", title: "5分钟", millisecond: 60 * 5 },
-	'15': { text: "2D", resolution: "15", description: "15分钟 - 范围3天", title: "15分钟", millisecond: 60 * 15 },
-	'30': { text: "5D", resolution: "30", description: "30分钟 - 范围1个月", title: "30分钟", millisecond: 60 * 30 },
-	'60': { text: "10D", resolution: "60", description: "1小时 - 范围3个月", title: "1小时", millisecond: 60 * 60 },
-	'240': { text: "1M", resolution: "240", description: "4小时 - 范围6个月", title: "4小时", millisecond: 60 * 240 },
-	'D': { text: "1Y", resolution: "D", description: "1天 - 范围1年", title: "1天", millisecond: 60 * 60 * 24 },
-	'3D': { text: "3Y", resolution: "3D", description: "3天 - 范围3年", title: "3天", millisecond: 60 * 60 * 24 * 3 },
+	'1': { text: "1D", resolution: "1", description: getCustomLang('timeList1'), title: getCustomLang('title1'), millisecond: 60 * 1 },
+	'5': { text: "1D", resolution: "5", description: getCustomLang('timeList5'), title: getCustomLang('title5'), millisecond: 60 * 5 },
+	'15': { text: "2D", resolution: "15", description: getCustomLang('timeList15'), title: getCustomLang('title15'), millisecond: 60 * 15 },
+	'30': { text: "5D", resolution: "30", description: getCustomLang('timeList30'), title: getCustomLang('title30'), millisecond: 60 * 30 },
+	'60': { text: "10D", resolution: "60", description: getCustomLang('timeList60'), title: getCustomLang('title60'), millisecond: 60 * 60 },
+	'240': { text: "1M", resolution: "240", description: getCustomLang('timeList240'), title: getCustomLang('title240'), millisecond: 60 * 240 },
+	'D': { text: "1Y", resolution: "D", description: getCustomLang('timeListD'), title: getCustomLang('titleD'), millisecond: 60 * 60 * 24 },
+	'3D': { text: "3Y", resolution: "3D", description: getCustomLang('timeList3D'), title: getCustomLang('title3D'), millisecond: 60 * 60 * 24 * 3 },
 };
 var tvTimeFrames = [];
 for(var i in tvTimeList){
@@ -38,10 +103,19 @@ var tvChangeTime = {
 		return tvTimeList[time].text;
 	}
 };
-var tvGetParameterByName = function(name) {
-	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
-	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g," "));
+function tvGetParameterByName (name) {
+	var tvLang = $.getCookie('Language');
+	if(tvLang == 'zh_CN'){
+		return 'zh';
+	}
+	else if(tvLang == 'en_US'){
+		return 'en';
+	}
+	else {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g," "));
+	}
 };
 
 
@@ -369,7 +443,7 @@ var period = function(widget){
 
 	widget.createButton()
 			.addClass("mydate")
-			.text('周期：')
+			.text(getCustomLang('dates'))
 			.css({'padding-right': '0'});
 
 	for(var i=0; i<tvTimeFrames.length; i++){
@@ -438,7 +512,7 @@ var indicators = function(widget){
 	// 指标各项按钮
 	widget.createButton()
 			.addClass("mydate")
-			.text('指标：')
+			.text(getCustomLang('zhibiao'))
 			.css({'padding-right': '0', 'border-left': '1px solid rgba(255,255,255,0.1)'});
 	widget.createButton()
 			.addClass("mydate")
@@ -586,6 +660,7 @@ DataRenderApi.prototype.getBars = function(symbolInfo, resolution, rangeStartDat
 				var bars = [];
 				console.log('ws:'+data);
 				var nodata = !data.length;
+				console.log(data.length);
 				for (var i = 0; i < data.length; i++) {
 					if(data[i][0] <= new Date().getTime()){
 						bars.push({
@@ -619,6 +694,7 @@ DataRenderApi.prototype.getBars = function(symbolInfo, resolution, rangeStartDat
 				if(!isSuccess){
 					tvSetting.isWsStop = true;
 					toajax();
+					tvSetting.isWsStop = true;
 				}
 			};
 		} else {
