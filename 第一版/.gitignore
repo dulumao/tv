@@ -1,0 +1,16 @@
+# Windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Python:
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+
+.zip
+.sass-cache/
+.idea/
+node_modules/
+.DS_Store

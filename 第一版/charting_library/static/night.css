@@ -1,0 +1,287 @@
+.chart-page {
+  background-color: #212139; }
+  .chart-page body {
+    color: #292A44; }
+  .chart-page .pane-legend-icon-container svg {
+    fill: #292A44; }
+  .chart-page .tv-side-toolbar .tools-group .button {
+    background-color: #181b2a;
+    border-color: #303254; }
+    .chart-page .tv-side-toolbar .tools-group .button .main.text-as-icon {
+      color: #4e5b85; }
+    .chart-page .tv-side-toolbar .tools-group .button svg {
+      fill: #4e5b85; }
+    .chart-page .tv-side-toolbar .tools-group .button.selected, .chart-page .tv-side-toolbar .tools-group .button:hover, .chart-page .tv-side-toolbar .tools-group .button:active {
+      background-color: #2c3b59;
+      border-color: #2c3b59; }
+      .chart-page .tv-side-toolbar .tools-group .button.selected svg, .chart-page .tv-side-toolbar .tools-group .button:hover svg, .chart-page .tv-side-toolbar .tools-group .button:active svg {
+        fill: #c7cce6; }
+      .chart-page .tv-side-toolbar .tools-group .button.selected .main.text-as-icon, .chart-page .tv-side-toolbar .tools-group .button:hover .main.text-as-icon, .chart-page .tv-side-toolbar .tools-group .button:active .main.text-as-icon {
+        color: #c7cce6; }
+      .chart-page .tv-side-toolbar .tools-group .button.selected .side, .chart-page .tv-side-toolbar .tools-group .button:hover .side, .chart-page .tv-side-toolbar .tools-group .button:active .side {
+        border-left: 1px solid transparent; }
+    .chart-page .tv-side-toolbar .tools-group .button:active svg {
+      fill: #4e5b85; }
+  .chart-page .charts-popup-list {
+    background-color: #181b2a;
+    color: #4e5b85;
+    border-color: #2c3b59; }
+    .chart-page .charts-popup-list .separator {
+      border-top: 1px solid #c1c8ec; }
+    .chart-page .charts-popup-list .item {
+      background-color: #181b2a;
+      color: #4e5b85; }
+      .chart-page .charts-popup-list .item.active {
+        background-color: #2c3b59;
+        color: #c7cce6; }
+    .chart-page .charts-popup-list .icon-wrap svg {
+      fill: #4e5b85; }
+  .chart-page .list-inner .item {
+    background-color: #181b2a; }
+    .chart-page .list-inner .item.active {
+      background-color: #2c3b59; }
+      .chart-page .list-inner .item.active svg {
+        fill: #c7cce6; }
+      .chart-page .list-inner .item.active span.title {
+        color: #c7cce6; }
+    .chart-page .list-inner .item span.title {
+      color: #4e5b85; }
+  .chart-page .favored-list-container span:hover {
+    background-color: #2C3B59; }
+  .chart-page .tv-floating-toolbar {
+    background-color: #2c3b59;
+    border-color: #292943; }
+    .chart-page .tv-floating-toolbar .tv-floating-toolbar__widget-wrapper .tv-floating-toolbar__drag, .chart-page .tv-floating-toolbar .tv-floating-toolbar__widget-wrapper input {
+      background-color: #181b2a; }
+      .chart-page .tv-floating-toolbar .tv-floating-toolbar__widget-wrapper .tv-floating-toolbar__drag svg, .chart-page .tv-floating-toolbar .tv-floating-toolbar__widget-wrapper input svg {
+        fill: #4e5b85; }
+    .chart-page .tv-floating-toolbar .tv-floating-toolbar__widget-wrapper .tv-floating-toolbar__widget {
+      border-color: #181b2a; }
+      .chart-page .tv-floating-toolbar .tv-floating-toolbar__widget-wrapper .tv-floating-toolbar__widget svg {
+        fill: #4e5b85; }
+  .chart-page .apply-common-tooltip {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #fff; }
+    .chart-page .apply-common-tooltip:before {
+      border: 1px solid transparent; }
+  .chart-page .chart-page .layout__area--center .chart-container.active {
+    border: 1px solid #181B2A !important;
+    background: #181B2A;
+    outline: 3px dashed green; }
+  .chart-page .chart-controls-bar {
+    background-color: #181B2A; }
+  .chart-page .tv-side-toolbar .tools-group .button:hover,
+  .chart-page .header-chart-panel .tools-group .button:hover {
+    background-color: #2C3B59; }
+  .chart-page .tv-side-toolbar .button:hover,
+  .chart-page .header-chart-panel .button:hover {
+    background: #2C3B59; }
+  .chart-page .tv-side-toolbar .group,
+  .chart-page .header-chart-panel .group {
+    float: left; }
+    .chart-page .tv-side-toolbar .group .button,
+    .chart-page .header-chart-panel .group .button {
+      font-weight: normal;
+      color: #fff; }
+      .chart-page .tv-side-toolbar .group .button svg,
+      .chart-page .header-chart-panel .group .button svg {
+        fill: #fff; }
+      .chart-page .tv-side-toolbar .group .button:hover, .chart-page .tv-side-toolbar .group .button.selected,
+      .chart-page .header-chart-panel .group .button:hover,
+      .chart-page .header-chart-panel .group .button.selected {
+        background: transparent;
+        color: #FECB31; }
+        .chart-page .tv-side-toolbar .group .button:hover svg, .chart-page .tv-side-toolbar .group .button.selected svg,
+        .chart-page .header-chart-panel .group .button:hover svg,
+        .chart-page .header-chart-panel .group .button.selected svg {
+          fill: #FECB31; }
+      .chart-page .tv-side-toolbar .group .button:active,
+      .chart-page .header-chart-panel .group .button:active {
+        color: #4e5b85; }
+        .chart-page .tv-side-toolbar .group .button:active svg,
+        .chart-page .header-chart-panel .group .button:active svg {
+          fill: #4e5b85; }
+  .chart-page .tv-side-toolbar .header-group-fullscreen,
+  .chart-page .header-chart-panel .header-group-fullscreen {
+    float: right;
+    padding-right: 5px; }
+  .chart-page .tv-side-toolbar .header-group-properties, .chart-page .tv-side-toolbar .header-group-indicators,
+  .chart-page .header-chart-panel .header-group-properties,
+  .chart-page .header-chart-panel .header-group-indicators {
+    float: none; }
+  .chart-page .tv-side-toolbar .tools-group:not(:first-child):not(.no-delimiter):before {
+    background: #4e5b85; }
+  .chart-page .button svg {
+    fill: #4e5b85; }
+  .chart-page .tv-side-toolbar {
+    border-right: 1px solid #181B2A;
+    background-color: #181B2A; }
+    .chart-page .tv-side-toolbar .tools-group .button.selected .side {
+      border-left: 1px solid transparent; }
+    .chart-page .tv-side-toolbar .tools-group .button.selected .side, .chart-page .tv-side-toolbar .tools-group .button.selected .main {
+      background: #2C3B59; }
+  .chart-page .chart-container {
+    background-color: #181B2A;
+    border: 1px solid transparent; }
+  .chart-page .tv-close-panel {
+    background-color: #2b304a;
+    border: none; }
+  .chart-page .button {
+    background-color: transparent;
+    border-color: transparent; }
+    .chart-page .button:hover {
+      color: #FECB31; }
+    .chart-page .button.selected, .chart-page .button.active {
+      color: #FECB31 !important; }
+      .chart-page .button.selected svg, .chart-page .button.active svg {
+        fill: #FECB31; }
+
+
+
+
+.header-chart-panel {
+	/*border-bottom: 1px solid #E2E2E2;*/
+}
+.header-chart-panel .group {
+	margin-top: 1px;
+}
+.chart-page .header-chart-panel .group .button.active svg {
+	fill: #FECB31;
+}
+.header-chart-panel .header-chart-panel-content {
+	padding-left: 1px;
+	text-transform: uppercase;
+}
+.chart-top-toolbar .space-single, .header-chart-panel .space-single {
+	padding-right: 1px;
+}
+.feature-no-touch .button-12d2ecdm-.isActive-2rPH92mZ-:hover .icon-1Aj0C0n9- svg, html.theme-dark.feature-no-touch .button-12d2ecdm-.isActive-2rPH92mZ-:hover .icon-1Aj0C0n9- svg,
+.button-12d2ecdm-.isActive-2rPH92mZ- .icon-1Aj0C0n9- svg,
+html.theme-dark .button-12d2ecdm-.isActive-2rPH92mZ- .icon-1Aj0C0n9- svg {
+	fill: #FECB31;
+}
+
+.separator-3cgsM4c1- {
+	background-color: #212139;
+}
+
+.pane-legend-item-value-container.no-context-menu {
+	color: #5F6191;
+	font-size: 12px;
+}
+.pane-legend .pane-legend-icon .expand, .pane-legend .pane-legend-minbtn .expand {
+	fill: #5F6191;
+}
+.pane-legend-line span > * {
+	font-size: 12px !important;
+}
+.pane-legend-line>span.pane-legend-line.no-context-menu {
+	color: #fff !important;
+	font-size: 12px !important;
+}
+.chart-page .pane-legend-icon-container svg {
+	fill: #fff !important;
+}
+.button-12d2ecdm-.isActive-2rPH92mZ- .bg-YlLYd-yv- {
+	background: none;
+}
+.feature-no-touch .button-12d2ecdm-.isActive-2rPH92mZ-:hover .bg-YlLYd-yv- {
+	background: none;
+}
+
+.feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .widgetbar-widgetheader .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .widgetbar-widgetheader .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .widgetbar-widgetheader .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .widgetbar-widgetheader .submenu:not(.disabled):not(.selected):hover:before
+{
+	display: none;
+}
+.bottom-widgetbar-content.backtesting .button.active, .ch-controls .button.active, .feature-no-touch .bottom-widgetbar-content.backtesting .button:active, .feature-no-touch .ch-controls .button:active, .feature-no-touch .header-chart-panel .button.active:hover, .feature-no-touch .header-chart-panel .button:active, .feature-no-touch .hotlist-controls .button:active, .feature-no-touch .save-load-buttons .active:hover, .feature-no-touch .save-load-buttons a:not(.link):active, .feature-no-touch .symbol-edit-widget .button:active, .feature-touch .bottom-widgetbar-content.backtesting .button:active, .feature-touch .ch-controls .button:active, .feature-touch .header-chart-panel .button:active, .feature-touch .hotlist-controls .button:active, .feature-touch .save-load-buttons a:not(.link):active, .feature-touch .symbol-edit-widget .button:active, .header-chart-panel .button.active, .header-chart-panel .button.i-active, .hotlist-controls .button.active, .save-load-buttons .active, .symbol-edit-widget .button.active {
+	background-color: transparent;
+}
+
+
+
+html {
+	background: #1A192B !important;
+}
+.chart-page {
+	background: #1A192B !important;
+}
+.loading-indicator {
+	background: #1A192B !important;
+}
+#library-container {
+	border-color: #1A192B !important;
+}
+.chart-container.active {
+	background: #1A192B !important;
+}
+
+.chart-loading-screen.fade .chart-loading-screen-shield {
+	background-color: #1A192B !important;
+	opacity: 1 !important;
+}
+
+.favored-list-container span {
+	background: #1A192B !important;
+	border-color: #1A192B !important;
+}
+.chart-controls-bar {
+	background: #1A192B !important;
+}
+.chart-controls-bar-buttons a:not(.disabled):hover {
+	background: #1A192B !important;
+}
+.chart-container.inactive .chart-controls-bar-buttons a:not(.disabled):hover {
+	background: #1A192B !important;
+}
+.drawing-favorites-toolbar .tools-group .button,
+.feature-no-touch .tv-side-toolbar .tools-group .button:active,
+.feature-no-touch .tv-side-toolbar .tools-group .button:hover,
+.feature-touch .tv-side-toolbar .tools-group .button:active,
+.properties-toolbar .tools-group .button,
+.tv-side-toolbar .tools-group .button.active,
+.tv-side-toolbar .tools-group .button.selected {
+	border-color: #1A192B !important;
+}
+
+.header-chart-panel .group .button {
+  display: block;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  line-height: 28px;
+  height: 28px;
+}
+.header-chart-panel .group .button svg {
+  vertical-align: middle;
+}
+
+/*.layout__area--top.js-hidden {*/
+  /*display: block !important;*/
+  /*right: 0 !important;*/
+/*}*/
+/*.layout__area--top.js-hidden .header-group-fullscreen {*/
+  /*display: none !important;*/
+/*}*/
+/*.layout__area--left.js-hidden .pane .pane-legend {*/
+  /*top: 30px;*/
+/*}*/
+
+/* .layout__area--left.js-hidden {
+  display: block !important;
+  bottom: 0 !important;
+}
+.layout__area--left.js-hidden .toggleButton-2o6YKJ1g- {
+  display: none !important;
+} */
+
+
+
+
+@media screen and (max-width: 600px){
+	.header-chart-panel .button {
+		padding-left: 5px !important;
+		padding-right: 5px !important;
+	}
+}

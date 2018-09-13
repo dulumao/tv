@@ -1,3 +1,5 @@
+var tvSetting = $.extend({}, tvOption);
+
 var customLang = {
 	'zh' : {
 		title1 : "1分钟",
@@ -337,6 +339,15 @@ WdAjax.prototype.post = function(listenerGUID){
 	}
 };
 WdAjax.prototype.post2 = function(data, callback){
+	$.ajax({
+		type: 'POST',
+		url: tvSetting.ajaxurl,
+		data: data,
+		success: function (evt) {
+			callback(evt);
+		},
+		dataType: 'json'
+	});
 };
 
 
@@ -596,91 +607,103 @@ DataRenderApi.prototype.getBars = function(symbolInfo, resolution, rangeStartDat
 	if(!wdajax) {
 		wdajax = new WdAjax();
 	}
-    if (!wdws) {
-        wdws = new WdWebsocket();
-    }
 
-    /*$.ajax({
-        type: 'POST',
-        url: tvSetting.ajaxurl,
-        data: {
-            message : tvSetting.coinid +"," + tvChangeTime.second(resolution) +","+ rangeStartDate +","+ rangeEndDate +",0"
-        },
-        success: function (evt) {
-            var data = evt;
-            console.log("ajax"+data);
-            var bars = [];
-            var nodata = !data.length;
-            for (var i = 0; i < data.length; i++) {
-                if(data[i][0] <= new Date().getTime()){
-                    bars.push({
-                        time : data[i][0],
-                        open : data[i][1],
-                        close : data[i][4],
-                        high : data[i][2],
-                        low : data[i][3],
-                        volume : data[i][5]
-                    });
-                }
-            }
+	var toajax = function(){
+		wdajax.post2({
+			message : tvSetting.coinid +"," + tvChangeTime.second(resolution) +","+ rangeStartDate +","+ rangeEndDate +",0"
+		}, function(evt){
+			var data = evt;
+			console.log("ajax"+data);
+			var bars = [];
+			var nodata = !data.length;
+			for (var i = 0; i < data.length; i++) {
+				if(data[i][0] <= new Date().getTime()){
+					bars.push({
+						time : data[i][0],
+						open : data[i][1],
+						close : data[i][4],
+						high : data[i][2],
+						low : data[i][3],
+						volume : data[i][5]
+					});
+				}
+			}
 
-            if(oldResolution == resolution && bars.length <= 1){
-                onDataCallback([], {
-                    noData : true
-                });
-            }
-            else {
-                onDataCallback(bars, {
-                    noData : nodata
-                });
-            }
-        },
-        dataType: 'json'
-    });*/
+			if(oldResolution == resolution && bars.length <= 1){
+				onDataCallback([], {
+					noData : true
+				});
+			}
+			else {
+				onDataCallback(bars, {
+					noData : nodata
+				});
+			}
+		});
+	};
 
+	if(tvSetting.isWsStop){
+		toajax();
+	}
+	else {
+		var isSuccess = false;
+		if (!wdws) {
+			wdws = new WdWebsocket();
+		}
+		if ("WebSocket" in window) {
+			console.log('123234');
+			var ws = window.ws = new WebSocket(tvSetting.wsurl);
+			ws.onopen = function() {
+				ws.send(tvSetting.coinid +"," + tvChangeTime.second(resolution)+"," +rangeStartDate+"," +rangeEndDate+",0");
+			};
+			ws.onmessage = function(evt) {
+				var data = JSON.parse(evt.data);
+				var bars = [];
+				console.log('ws:'+data);
+				var nodata = !data.length;
+				console.log(data.length);
+				for (var i = 0; i < data.length; i++) {
+					if(data[i][0] <= new Date().getTime()){
+						bars.push({
+							time : data[i][0],
+							open : data[i][1],
+							close : data[i][4],
+							high : data[i][2],
+							low : data[i][3],
+							volume : data[i][5]
+						});
+					}
+				}
 
-    // 暂时不能跨域，使用ws
-    if ("WebSocket" in window) {
-        var wsFirst = window.wsFirst = new WebSocket(tvSetting.wsurl);
-        wsFirst.onopen = function() {
-            wsFirst.send(tvSetting.coinid +"," + tvChangeTime.second(resolution)+"," +rangeStartDate+"," +rangeEndDate+",0");
-        };
-        wsFirst.onmessage = function(evt) {
-            var data = JSON.parse(evt.data);
-            var bars = [];
-            var nodata = !data.length;
-            for (var i = 0; i < data.length; i++) {
-                if(data[i][0] <= new Date().getTime()){
-                    bars.push({
-                        time : data[i][0],
-                        open : data[i][1],
-                        close : data[i][4],
-                        high : data[i][2],
-                        low : data[i][3],
-                        volume : data[i][5]
-                    });
-                }
-            }
-
-            if(oldResolution == resolution && bars.length <= 1){
-                // oldData = bars[0].time;
-                onDataCallback([], {
-                    noData : true
-                });
-            }
-            else {
-                // oldData = bars[0].time;
-                onDataCallback(bars, {
-                    noData : nodata
-                });
-            }
-            isSuccess = true;
-            wsFirst.close();
-        };
-        wsFirst.onclose = function() {
-            console.log("ws历史记录链接已关闭...");
-        };
-    }
+				if(oldResolution == resolution && bars.length <= 1){
+					// oldData = bars[0].time;
+					onDataCallback([], {
+						noData : true
+					});
+				}
+				else {
+					// oldData = bars[0].time;
+					onDataCallback(bars, {
+						noData : nodata
+					});
+				}
+				isSuccess = true;
+				ws.close();
+			};
+			ws.onclose = function() {
+				console.log("ws历史记录链接已关闭...");
+				if(!isSuccess){
+					tvSetting.isWsStop = true;
+					toajax();
+					tvSetting.isWsStop = true;
+				}
+			};
+		} else {
+			console.log("您的浏览器不支持 WebSocket!");
+			tvSetting.isWsStop = true;
+			toajax();
+		}
+	}
 };
 DataRenderApi.prototype.resolveSymbol = function(symbolName, onSymbolResolvedCallback, onResolveErrorCallback) {
 	var _this = this;
@@ -698,9 +721,9 @@ DataRenderApi.prototype.unsubscribeBars = function(listenerGUID) {
 	}
 	else {
 		clearTimeout(loopTime);
-		if (window.wsFirst) {
+		if (window.ws) {
 			try {
-				window.wsFirst.close();
+				window.ws.close();
 			} catch(e) {}
 		}
 	}

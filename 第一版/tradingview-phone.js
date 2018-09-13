@@ -1,67 +1,4 @@
-var customLang = {
-	'zh' : {
-		title1 : "1分钟",
-		timeList1 : "1分钟 - 范围1天",
-
-		title5 : "5分钟",
-		timeList5 : "5分钟 - 范围2天",
-
-		title15 : "15分钟",
-		timeList15 : "15分钟 - 范围3天",
-
-		title30 : "30分钟",
-		timeList30 : "30分钟 - 范围1个月",
-
-		title60 : "1小时",
-		timeList60 : "1小时 - 范围3个月",
-
-		title240 : "4小时",
-		timeList240 : "4小时 - 范围6个月",
-
-		titleD : "1天",
-		timeListD : "1天 - 范围1年",
-
-		title3D : "3天",
-		timeList3D : "3天 - 范围3年",
-
-		datas: "周期：",
-		zhibiao: "指标："
-	},
-
-	'en' : {
-		title1 : "1M",
-		timeList1 : "1M - Range 1D",
-
-		title5 : "5M",
-		timeList5 : "5M - Range 2D",
-
-		title15 : "15M",
-		timeList15 : "15M - Range 3D",
-
-		title30 : "30M",
-		timeList30 : "30M - Range 1Month",
-
-		title60 : "1H",
-		timeList60 : "1H - Range 3Month",
-
-		title240 : "4H",
-		timeList240 : "4H - Range 6Month",
-
-		titleD : "1D",
-		timeListD : "1天 - Range 1Y",
-
-		title3D : "3D",
-		timeList3D : "3D - Range 1Y",
-
-		datas: "Period：",
-		zhibiao: "Indicatrix："
-	}
-};
-var getCustomLang = function(name){
-	var lang = tvGetParameterByName('lang') || 'zh';
-	return customLang[lang][name];
-}
-
+var tvSetting = $.extend({}, tvOption);
 
 var wdws = null;
 var wdajax = null;
@@ -74,14 +11,14 @@ var repeatCount = 0;
 
 // 自定义周期按钮
 var tvTimeList = {
-	'1': { text: "1D", resolution: "1", description: getCustomLang('timeList1'), title: getCustomLang('title1'), millisecond: 60 * 1 },
-	'5': { text: "1D", resolution: "5", description: getCustomLang('timeList5'), title: getCustomLang('title5'), millisecond: 60 * 5 },
-	'15': { text: "2D", resolution: "15", description: getCustomLang('timeList15'), title: getCustomLang('title15'), millisecond: 60 * 15 },
-	'30': { text: "5D", resolution: "30", description: getCustomLang('timeList30'), title: getCustomLang('title30'), millisecond: 60 * 30 },
-	'60': { text: "10D", resolution: "60", description: getCustomLang('timeList60'), title: getCustomLang('title60'), millisecond: 60 * 60 },
-	'240': { text: "1M", resolution: "240", description: getCustomLang('timeList240'), title: getCustomLang('title240'), millisecond: 60 * 240 },
-	'D': { text: "1Y", resolution: "D", description: getCustomLang('timeListD'), title: getCustomLang('titleD'), millisecond: 60 * 60 * 24 },
-	'3D': { text: "3Y", resolution: "3D", description: getCustomLang('timeList3D'), title: getCustomLang('title3D'), millisecond: 60 * 60 * 24 * 3 },
+	'1': { text: "1D", resolution: "1", description: "1分钟 - 范围1天", title: "1分钟", millisecond: 60 * 1 },
+	'5': { text: "1D", resolution: "5", description: "5分钟 - 范围2天", title: "5分钟", millisecond: 60 * 5 },
+	'15': { text: "2D", resolution: "15", description: "15分钟 - 范围3天", title: "15分钟", millisecond: 60 * 15 },
+	'30': { text: "5D", resolution: "30", description: "30分钟 - 范围1个月", title: "30分钟", millisecond: 60 * 30 },
+	'60': { text: "10D", resolution: "60", description: "1小时 - 范围3个月", title: "1小时", millisecond: 60 * 60 },
+	'240': { text: "1M", resolution: "240", description: "4小时 - 范围6个月", title: "4小时", millisecond: 60 * 240 },
+	'D': { text: "1Y", resolution: "D", description: "1天 - 范围1年", title: "1天", millisecond: 60 * 60 * 24 },
+	'3D': { text: "3Y", resolution: "3D", description: "3天 - 范围3年", title: "3天", millisecond: 60 * 60 * 24 * 3 },
 };
 var tvTimeFrames = [];
 for(var i in tvTimeList){
@@ -101,20 +38,10 @@ var tvChangeTime = {
 		return tvTimeList[time].text;
 	}
 };
-function tvGetParameterByName (name) {
-	// var tvLang = $.getCookie('Language');
-	var tvLang = 'zh_CN';
-	if(tvLang == 'zh_CN'){
-		return 'zh';
-	}
-	else if(tvLang == 'en_US'){
-		return 'en';
-	}
-	else {
-		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
-		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g," "));
-	}
+var tvGetParameterByName = function(name) {
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g," "));
 };
 
 
@@ -337,6 +264,15 @@ WdAjax.prototype.post = function(listenerGUID){
 	}
 };
 WdAjax.prototype.post2 = function(data, callback){
+	$.ajax({
+		type: 'POST',
+		url: tvSetting.ajaxurl,
+		data: data,
+		success: function (evt) {
+			callback(evt);
+		},
+		dataType: 'json'
+	});
 };
 
 
@@ -352,8 +288,11 @@ var widgetDefaultOption = {
 	library_path : "charting_library/",
 	locale : tvGetParameterByName('lang') || "zh",
 	timezone : "Asia/Shanghai",
-	fullscreen : true,
-	autosize : true,
+	fullscreen : false,
+	autosize : false,
+	width: '100%',
+	height: '400px',
+	adaptive_logo: true,
 	charts_storage_url : location.host,
 	charts_storage_api_version : "1.1",
 	source_selection_markers: 'off',
@@ -433,7 +372,7 @@ var period = function(widget){
 
 	widget.createButton()
 			.addClass("mydate")
-			.text(getCustomLang('dates'))
+			.text('周期：')
 			.css({'padding-right': '0'});
 
 	for(var i=0; i<tvTimeFrames.length; i++){
@@ -502,7 +441,7 @@ var indicators = function(widget){
 	// 指标各项按钮
 	widget.createButton()
 			.addClass("mydate")
-			.text(getCustomLang('zhibiao'))
+			.text('指标：')
 			.css({'padding-right': '0', 'border-left': '1px solid rgba(255,255,255,0.1)'});
 	widget.createButton()
 			.addClass("mydate")
@@ -553,7 +492,7 @@ TradingView.onready(function() {
 		}
 
 		// 自定义分辨率按钮
-		period(widget);
+		// period(widget);
 
 		//指标
 		indicators(widget);
@@ -596,91 +535,101 @@ DataRenderApi.prototype.getBars = function(symbolInfo, resolution, rangeStartDat
 	if(!wdajax) {
 		wdajax = new WdAjax();
 	}
-    if (!wdws) {
-        wdws = new WdWebsocket();
-    }
 
-    /*$.ajax({
-        type: 'POST',
-        url: tvSetting.ajaxurl,
-        data: {
-            message : tvSetting.coinid +"," + tvChangeTime.second(resolution) +","+ rangeStartDate +","+ rangeEndDate +",0"
-        },
-        success: function (evt) {
-            var data = evt;
-            console.log("ajax"+data);
-            var bars = [];
-            var nodata = !data.length;
-            for (var i = 0; i < data.length; i++) {
-                if(data[i][0] <= new Date().getTime()){
-                    bars.push({
-                        time : data[i][0],
-                        open : data[i][1],
-                        close : data[i][4],
-                        high : data[i][2],
-                        low : data[i][3],
-                        volume : data[i][5]
-                    });
-                }
-            }
+	var toajax = function(){
+		wdajax.post2({
+			message : tvSetting.coinid +"," + tvChangeTime.second(resolution) +","+ rangeStartDate +","+ rangeEndDate +",0"
+		}, function(evt){
+			var data = evt;
+			console.log("ajax"+data);
+			var bars = [];
+			var nodata = !data.length;
+			for (var i = 0; i < data.length; i++) {
+				if(data[i][0] <= new Date().getTime()){
+					bars.push({
+						time : data[i][0],
+						open : data[i][1],
+						close : data[i][4],
+						high : data[i][2],
+						low : data[i][3],
+						volume : data[i][5]
+					});
+				}
+			}
 
-            if(oldResolution == resolution && bars.length <= 1){
-                onDataCallback([], {
-                    noData : true
-                });
-            }
-            else {
-                onDataCallback(bars, {
-                    noData : nodata
-                });
-            }
-        },
-        dataType: 'json'
-    });*/
+			if(oldResolution == resolution && bars.length <= 1){
+				onDataCallback([], {
+					noData : true
+				});
+			}
+			else {
+				onDataCallback(bars, {
+					noData : nodata
+				});
+			}
+		});
+	};
 
+	if(tvSetting.isWsStop){
+		toajax();
+	}
+	else {
+		var isSuccess = false;
+		if (!wdws) {
+			wdws = new WdWebsocket();
+		}
+		if ("WebSocket" in window) {
+			console.log('123234');
+			var ws = window.ws = new WebSocket(tvSetting.wsurl);
+			ws.onopen = function() {
+				ws.send(tvSetting.coinid +"," + tvChangeTime.second(resolution)+"," +rangeStartDate+"," +rangeEndDate+",0");
+			};
+			ws.onmessage = function(evt) {
+				var data = JSON.parse(evt.data);
+				var bars = [];
+				console.log('ws:'+data);
+				var nodata = !data.length;
+				for (var i = 0; i < data.length; i++) {
+					if(data[i][0] <= new Date().getTime()){
+						bars.push({
+							time : data[i][0],
+							open : data[i][1],
+							close : data[i][4],
+							high : data[i][2],
+							low : data[i][3],
+							volume : data[i][5]
+						});
+					}
+				}
 
-    // 暂时不能跨域，使用ws
-    if ("WebSocket" in window) {
-        var wsFirst = window.wsFirst = new WebSocket(tvSetting.wsurl);
-        wsFirst.onopen = function() {
-            wsFirst.send(tvSetting.coinid +"," + tvChangeTime.second(resolution)+"," +rangeStartDate+"," +rangeEndDate+",0");
-        };
-        wsFirst.onmessage = function(evt) {
-            var data = JSON.parse(evt.data);
-            var bars = [];
-            var nodata = !data.length;
-            for (var i = 0; i < data.length; i++) {
-                if(data[i][0] <= new Date().getTime()){
-                    bars.push({
-                        time : data[i][0],
-                        open : data[i][1],
-                        close : data[i][4],
-                        high : data[i][2],
-                        low : data[i][3],
-                        volume : data[i][5]
-                    });
-                }
-            }
-
-            if(oldResolution == resolution && bars.length <= 1){
-                // oldData = bars[0].time;
-                onDataCallback([], {
-                    noData : true
-                });
-            }
-            else {
-                // oldData = bars[0].time;
-                onDataCallback(bars, {
-                    noData : nodata
-                });
-            }
-            isSuccess = true;
-            wsFirst.close();
-        };
-        wsFirst.onclose = function() {
-            console.log("ws历史记录链接已关闭...");
-        };
-    }
+				if(oldResolution == resolution && bars.length <= 1){
+					// oldData = bars[0].time;
+					onDataCallback([], {
+						noData : true
+					});
+				}
+				else {
+					// oldData = bars[0].time;
+					onDataCallback(bars, {
+						noData : nodata
+					});
+				}
+				isSuccess = true;
+				ws.close();
+			};
+			ws.onclose = function() {
+				console.log("ws历史记录链接已关闭...");
+				if(!isSuccess){
+					tvSetting.isWsStop = true;
+					toajax();
+				}
+			};
+		} else {
+			console.log("您的浏览器不支持 WebSocket!");
+			tvSetting.isWsStop = true;
+			toajax();
+		}
+	}
 };
 DataRenderApi.prototype.resolveSymbol = function(symbolName, onSymbolResolvedCallback, onResolveErrorCallback) {
 	var _this = this;
@@ -698,9 +647,9 @@ DataRenderApi.prototype.unsubscribeBars = function(listenerGUID) {
 	}
 	else {
 		clearTimeout(loopTime);
-		if (window.wsFirst) {
+		if (window.ws) {
 			try {
-				window.wsFirst.close();
+				window.ws.close();
 			} catch(e) {}
 		}
 	}
