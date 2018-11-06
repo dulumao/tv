@@ -103,8 +103,8 @@ var tvChangeTime = {
 	}
 };
 function tvGetParameterByName (name) {
-	// var tvLang = $.getCookie('Language');
-	var tvLang = 'zh_CN';
+	var tvLang = $.getCookie('Language');
+	// var tvLang = 'zh_CN';
 	if(tvLang == 'zh_CN'){
 		return 'zh';
 	}
